@@ -220,7 +220,7 @@ impl RapierFluid {
         }
     }
 
-    pub fn set_density(&mut self, density: f32, physics_engine: &mut PhysicsEngine) {
+    pub fn set_density(&mut self, density: f64, physics_engine: &mut PhysicsEngine) {
         self.density = density;
         if self.is_valid() {
             physics_engine.fluid_change_density(self.space_id, self.fluid_handle, density);

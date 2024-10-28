@@ -202,7 +202,7 @@ impl RapierSpace {
         p_body: &RapierBody,
         p_transform: &mut Transform,
         p_motion: Vector,
-        p_margin: f32,
+        p_margin: f64,
         p_recover_motion: &mut Vector,
         physics_engine: &PhysicsEngine,
         physics_shapes: &PhysicsShapes,
@@ -349,10 +349,10 @@ impl RapierSpace {
         p_transform: &Transform,
         p_motion: Vector,
         _p_collide_separation_ray: bool,
-        _contact_max_allowed_penetration: f32,
-        p_margin: f32,
-        p_closest_safe: &mut f32,
-        p_closest_unsafe: &mut f32,
+        _contact_max_allowed_penetration: f64,
+        p_margin: f64,
+        p_closest_safe: &mut f64,
+        p_closest_unsafe: &mut f64,
         p_best_body_shape: &mut i32,
         physics_engine: &PhysicsEngine,
         physics_shapes: &PhysicsShapes,
@@ -550,7 +550,7 @@ impl RapierSpace {
         p_transform: &Transform,
         p_motion: Vector,
         p_best_body_shape: i32,
-        p_margin: f32,
+        p_margin: f64,
         p_result: &mut PhysicsServerExtensionMotionResult,
         physics_engine: &PhysicsEngine,
         physics_shapes: &PhysicsShapes,
@@ -585,7 +585,7 @@ impl RapierSpace {
         if result_count == 0 {
             return false;
         }
-        let mut min_distance = f32::INFINITY;
+        let mut min_distance = f64::INFINITY;
         let mut best_collision_body = None;
         let mut best_collision_shape_index: i32 = -1;
         let mut best_body_shape_index = -1;
@@ -766,8 +766,8 @@ impl PhysicsEngine {
         collision_body: &RapierCollisionObject,
         shape_index: usize,
         col_shape_transform: &Transform,
-        p_margin: f32,
-        last_step: f32,
+        p_margin: f64,
+        last_step: f64,
         p_motion: Vector,
     ) -> bool {
         let dist = contact.pixel_distance;

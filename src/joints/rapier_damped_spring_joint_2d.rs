@@ -70,7 +70,7 @@ impl RapierDampedSpringJoint2D {
     pub fn set_param(
         &mut self,
         p_param: physics_server_2d::DampedSpringParam,
-        p_value: f32,
+        p_value: f64,
         physics_engine: &mut PhysicsEngine,
     ) {
         match p_param {
@@ -97,7 +97,7 @@ impl RapierDampedSpringJoint2D {
         );
     }
 
-    pub fn get_param(&self, p_param: physics_server_2d::DampedSpringParam) -> f32 {
+    pub fn get_param(&self, p_param: physics_server_2d::DampedSpringParam) -> f64 {
         match p_param {
             physics_server_2d::DampedSpringParam::DAMPING => self.damping,
             physics_server_2d::DampedSpringParam::STIFFNESS => self.stiffness,

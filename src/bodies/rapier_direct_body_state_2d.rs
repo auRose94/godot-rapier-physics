@@ -32,11 +32,11 @@ impl IPhysicsDirectBodyState2DExtension for RapierDirectBodyState2D {
         self.implementation.get_total_gravity()
     }
 
-    fn get_total_linear_damp(&self) -> f32 {
+    fn get_total_linear_damp(&self) -> f64 {
         self.implementation.get_total_linear_damp()
     }
 
-    fn get_total_angular_damp(&self) -> f32 {
+    fn get_total_angular_damp(&self) -> f64 {
         self.implementation.get_total_angular_damp()
     }
 
@@ -48,7 +48,7 @@ impl IPhysicsDirectBodyState2DExtension for RapierDirectBodyState2D {
         self.implementation.get_center_of_mass_local()
     }
 
-    fn get_inverse_mass(&self) -> f32 {
+    fn get_inverse_mass(&self) -> f64 {
         self.implementation.get_inverse_mass()
     }
 
@@ -196,7 +196,7 @@ impl IPhysicsDirectBodyState2DExtension for RapierDirectBodyState2D {
         self.implementation.get_contact_impulse(contact_idx)
     }
 
-    fn get_step(&self) -> f32 {
+    fn get_step(&self) -> f64 {
         RapierSpace::get_last_step()
     }
 

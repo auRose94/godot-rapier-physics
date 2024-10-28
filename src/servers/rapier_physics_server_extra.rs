@@ -311,7 +311,7 @@ impl RapierPhysicsServer {
 
     #[func]
     /// Step the space forward.
-    fn space_step(space: Rid, delta: f32) {
+    fn space_step(space: Rid, delta: f64) {
         let Ok(mut physics_singleton) =
             PhysicsServer::singleton().try_cast::<RapierPhysicsServer>()
         else {

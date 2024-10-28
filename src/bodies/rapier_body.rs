@@ -885,7 +885,7 @@ impl RapierBody {
             idx = self.state.contact_count;
             self.state.contact_count += 1;
         } else {
-            let mut least_depth = f32::INFINITY;
+            let mut least_depth = f64::INFINITY;
             let mut least_deep: i32 = -1;
             for (i, contact) in self.state.contacts.iter().enumerate() {
                 if i == 0 || contact.depth < least_depth {

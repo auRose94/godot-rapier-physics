@@ -30,7 +30,7 @@ pub struct Fluid2D {
     #[export]
     #[var(get = get_points, set = set_points)]
     pub(crate) points: PackedVectorArray,
-    pub(crate) create_times: PackedFloat32Array,
+    pub(crate) create_times: PackedFloat64Array,
     base: Base<Node2D>,
 }
 #[godot_api]
@@ -69,7 +69,7 @@ impl Fluid2D {
 
     #[func]
     /// Get the remaining times of the fluid particles. Use this to draw particles with less alpha as time runs out.
-    fn get_remaining_times(&self) -> PackedFloat32Array {
+    fn get_remaining_times(&self) -> PackedFloat64Array {
         FluidImpl::get_remaining_times(self)
     }
 
@@ -93,7 +93,7 @@ impl Fluid2D {
         for i in 0..width {
             for j in 0..height {
                 new_points[(i + j * width) as usize] =
-                    Vector2::new(i as f32 * self.radius * 2.0, j as f32 * self.radius * 2.0);
+                    Vector2::new(i as f64 * self.radius * 2.0, j as f64 * self.radius * 2.0);
             }
         }
         new_points
@@ -105,8 +105,8 @@ impl Fluid2D {
         let mut new_points = PackedVectorArray::default();
         for i in -radius..radius {
             for j in -radius..radius {
-                let x = i as f32 * self.radius * 2.0;
-                let y = j as f32 * self.radius * 2.0;
+                let x = i as f64 * self.radius * 2.0;
+                let y = j as f64 * self.radius * 2.0;
                 if i * i + j * j <= radius * radius {
                     new_points.push(Vector2::new(x, y));
                 }
@@ -161,7 +161,7 @@ impl INode2D for Fluid2D {
             lifetime: 0.0,
             effects: Array::new(),
             points: PackedVectorArray::new(),
-            create_times: PackedFloat32Array::new(),
+            create_times: PackedFloat64Array::new(),
             base,
         }
     }

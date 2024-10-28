@@ -17,7 +17,7 @@ pub struct RapierJointBaseState {
 }
 pub struct RapierJointBase {
     rid: Rid,
-    max_force: f32,
+    max_force: f64,
     disabled_collisions_between_bodies: bool,
     state: RapierJointBaseState,
 }
@@ -42,7 +42,7 @@ impl RapierJointBase {
     ) -> Self {
         Self {
             rid,
-            max_force: f32::MAX,
+            max_force: f64::MAX,
             disabled_collisions_between_bodies: true,
             state: RapierJointBaseState {
                 id,
@@ -73,11 +73,11 @@ impl RapierJointBase {
         get_id_rid(self.state.space_id, physics_ids)
     }
 
-    pub fn set_max_force(&mut self, force: f32) {
+    pub fn set_max_force(&mut self, force: f64) {
         self.max_force = force;
     }
 
-    pub fn get_max_force(&self) -> f32 {
+    pub fn get_max_force(&self) -> f64 {
         self.max_force
     }
 

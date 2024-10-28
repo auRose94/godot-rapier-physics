@@ -62,8 +62,8 @@ pub struct RapierPhysicsServerImpl {
     num_additional_friction_iterations: usize,
     num_internal_pgs_iterations: usize,
     num_solver_iterations: usize,
-    joint_damping_ratio: f32,
-    joint_natural_frequency: f32,
+    joint_damping_ratio: f64,
+    joint_natural_frequency: f64,
     normalized_allowed_linear_error: real,
     normalized_max_corrective_velocity: real,
     normalized_prediction_distance: real,
@@ -254,7 +254,7 @@ impl RapierPhysicsServerImpl {
         Variant::nil()
     }
 
-    pub(super) fn shape_get_custom_solver_bias(&self, _shape: Rid) -> f32 {
+    pub(super) fn shape_get_custom_solver_bias(&self, _shape: Rid) -> f64 {
         0.0
     }
 
@@ -342,9 +342,9 @@ impl RapierPhysicsServerImpl {
         false
     }
 
-    pub(super) fn space_set_param(&mut self, _space: Rid, _param: SpaceParameter, _value: f32) {}
+    pub(super) fn space_set_param(&mut self, _space: Rid, _param: SpaceParameter, _value: f64) {}
 
-    pub(super) fn space_get_param(&self, _space: Rid, _param: SpaceParameter) -> f32 {
+    pub(super) fn space_get_param(&self, _space: Rid, _param: SpaceParameter) -> f64 {
         0.0
     }
 
@@ -955,7 +955,7 @@ impl RapierPhysicsServerImpl {
         body: Rid,
         shape_idx: i32,
         enable: bool,
-        margin: f32,
+        margin: f64,
     ) {
         let physics_data = physics_data();
         if let Some(body) = physics_data.collision_objects.get_mut(&body) {
@@ -1114,9 +1114,9 @@ impl RapierPhysicsServerImpl {
         0
     }
 
-    pub(super) fn body_set_collision_priority(&mut self, _body: Rid, _priority: f32) {}
+    pub(super) fn body_set_collision_priority(&mut self, _body: Rid, _priority: f64) {}
 
-    pub(super) fn body_get_collision_priority(&self, _body: Rid) -> f32 {
+    pub(super) fn body_get_collision_priority(&self, _body: Rid) -> f64 {
         0.0
     }
 
@@ -1465,11 +1465,11 @@ impl RapierPhysicsServerImpl {
     pub(super) fn body_set_contacts_reported_depth_threshold(
         &mut self,
         _body: Rid,
-        _threshold: f32,
+        _threshold: f64,
     ) {
     }
 
-    pub(super) fn body_get_contacts_reported_depth_threshold(&self, _body: Rid) -> f32 {
+    pub(super) fn body_get_contacts_reported_depth_threshold(&self, _body: Rid) -> f64 {
         0.0
     }
 
@@ -1608,7 +1608,7 @@ impl RapierPhysicsServerImpl {
         body: Rid,
         from: Transform,
         motion: Vector,
-        margin: f32,
+        margin: f64,
         _max_collisions: i32,
         collide_separation_ray: bool,
         recovery_as_collision: bool,
@@ -1671,7 +1671,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim2")]
-    pub(super) fn joint_set_param(&mut self, joint: Rid, param: JointParam, value: f32) {
+    pub(super) fn joint_set_param(&mut self, joint: Rid, param: JointParam, value: f64) {
         let physics_data = physics_data();
         if let Some(joint) = physics_data.joints.get_mut(&joint) {
             if param == JointParam::MAX_FORCE {
@@ -1681,7 +1681,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim2")]
-    pub(super) fn joint_get_param(&self, joint: Rid, param: JointParam) -> f32 {
+    pub(super) fn joint_get_param(&self, joint: Rid, param: JointParam) -> f64 {
         let physics_data = physics_data();
         if let Some(joint) = physics_data.joints.get(&joint) {
             if param == JointParam::MAX_FORCE {
@@ -1756,10 +1756,10 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim3")]
-    pub(super) fn pin_joint_set_param(&mut self, _joint: Rid, _param: PinJointParam, _value: f32) {}
+    pub(super) fn pin_joint_set_param(&mut self, _joint: Rid, _param: PinJointParam, _value: f64) {}
 
     #[cfg(feature = "dim3")]
-    pub(super) fn pin_joint_get_param(&self, _joint: Rid, _param: PinJointParam) -> f32 {
+    pub(super) fn pin_joint_get_param(&self, _joint: Rid, _param: PinJointParam) -> f64 {
         0.0
     }
 
@@ -1883,7 +1883,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim3")]
-    pub(super) fn hinge_joint_set_param(&mut self, joint: Rid, param: HingeJointParam, value: f32) {
+    pub(super) fn hinge_joint_set_param(&mut self, joint: Rid, param: HingeJointParam, value: f64) {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierRevoluteJoint(joint)) = physics_data.joints.get_mut(&joint) {
             joint.set_param(param, value, &mut physics_data.physics_engine);
@@ -1891,7 +1891,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim3")]
-    pub(super) fn hinge_joint_get_param(&self, joint: Rid, param: HingeJointParam) -> f32 {
+    pub(super) fn hinge_joint_get_param(&self, joint: Rid, param: HingeJointParam) -> f64 {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierRevoluteJoint(joint)) = physics_data.joints.get(&joint) {
             return joint.get_param(param);
@@ -1961,7 +1961,7 @@ impl RapierPhysicsServerImpl {
         &mut self,
         _joint: Rid,
         _param: physics_server_3d::SliderJointParam,
-        _value: f32,
+        _value: f64,
     ) {
     }
 
@@ -1970,7 +1970,7 @@ impl RapierPhysicsServerImpl {
         &self,
         _joint: Rid,
         _param: physics_server_3d::SliderJointParam,
-    ) -> f32 {
+    ) -> f64 {
         0.0
     }
 
@@ -2019,7 +2019,7 @@ impl RapierPhysicsServerImpl {
         &mut self,
         _joint: Rid,
         _param: physics_server_3d::ConeTwistJointParam,
-        _value: f32,
+        _value: f64,
     ) {
     }
 
@@ -2028,7 +2028,7 @@ impl RapierPhysicsServerImpl {
         &self,
         _joint: Rid,
         _param: physics_server_3d::ConeTwistJointParam,
-    ) -> f32 {
+    ) -> f64 {
         0.0
     }
 
@@ -2078,7 +2078,7 @@ impl RapierPhysicsServerImpl {
         _joint: Rid,
         _axis: Vector3Axis,
         _param: physics_server_3d::G6dofJointAxisParam,
-        _value: f32,
+        _value: f64,
     ) {
     }
 
@@ -2088,7 +2088,7 @@ impl RapierPhysicsServerImpl {
         _joint: Rid,
         _axis: Vector3Axis,
         _param: physics_server_3d::G6dofJointAxisParam,
-    ) -> f32 {
+    ) -> f64 {
         0.0
     }
 
@@ -2242,7 +2242,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim2")]
-    pub(super) fn pin_joint_set_param(&mut self, joint: Rid, param: PinJointParam, value: f32) {
+    pub(super) fn pin_joint_set_param(&mut self, joint: Rid, param: PinJointParam, value: f64) {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierRevoluteJoint(joint)) = physics_data.joints.get_mut(&joint) {
             joint.set_param(param, value, &mut physics_data.physics_engine);
@@ -2250,7 +2250,7 @@ impl RapierPhysicsServerImpl {
     }
 
     #[cfg(feature = "dim2")]
-    pub(super) fn pin_joint_get_param(&self, joint: Rid, param: PinJointParam) -> f32 {
+    pub(super) fn pin_joint_get_param(&self, joint: Rid, param: PinJointParam) -> f64 {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierRevoluteJoint(joint)) = physics_data.joints.get(&joint) {
             return joint.get_param(param);
@@ -2263,7 +2263,7 @@ impl RapierPhysicsServerImpl {
         &mut self,
         joint: Rid,
         param: DampedSpringParam,
-        value: f32,
+        value: f64,
     ) {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierDampedSpringJoint2D(joint)) =
@@ -2278,7 +2278,7 @@ impl RapierPhysicsServerImpl {
         &self,
         joint: Rid,
         param: DampedSpringParam,
-    ) -> f32 {
+    ) -> f64 {
         let physics_data = physics_data();
         if let Some(RapierJoint::RapierDampedSpringJoint2D(joint)) = physics_data.joints.get(&joint)
         {
@@ -2375,7 +2375,7 @@ impl RapierPhysicsServerImpl {
         self.id = RapierId::default();
     }
 
-    pub(super) fn step(&mut self, step: f32) {
+    pub(super) fn step(&mut self, step: f64) {
         let physics_data = physics_data();
         if !self.active {
             return;
@@ -2412,7 +2412,7 @@ impl RapierPhysicsServerImpl {
         }
     }
 
-    pub(super) fn space_step(&mut self, space_rid: &Rid, step: f32) {
+    pub(super) fn space_step(&mut self, space_rid: &Rid, step: f64) {
         let physics_data = physics_data();
         if !self.active {
             return;

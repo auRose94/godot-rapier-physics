@@ -12,7 +12,7 @@ impl FluidImpl {
         fluid.create_times.resize(fluid.points.len());
         let ticks = Time::singleton().get_ticks_msec();
         for i in old_times..fluid.points.len() {
-            fluid.create_times[i] = ticks as f32;
+            fluid.create_times[i] = ticks as f64;
         }
         let gl_transform = fluid.to_gd().get_global_transform();
         let mut rapier_points = fluid.points.clone();
@@ -62,9 +62,9 @@ impl FluidImpl {
         accelerations
     }
 
-    pub fn get_remaining_times(fluid: &Fluid) -> PackedFloat32Array {
-        let ticks = Time::singleton().get_ticks_msec() as f32;
-        let mut remaining_times = PackedFloat32Array::default();
+    pub fn get_remaining_times(fluid: &Fluid) -> PackedFloat64Array {
+        let ticks = Time::singleton().get_ticks_msec() as f64;
+        let mut remaining_times = PackedFloat64Array::default();
         remaining_times.resize(fluid.create_times.len());
         let div_1000 = 1.0 / 1000.0;
         for i in 0..fluid.create_times.len() {
@@ -106,7 +106,7 @@ impl FluidImpl {
         let old_times = fluid.create_times.len();
         let ticks = Time::singleton().get_ticks_msec();
         for _i in old_times..fluid.points.len() {
-            fluid.create_times.push(ticks as f32);
+            fluid.create_times.push(ticks as f64);
         }
         let gl_transform = fluid.to_gd().get_global_transform();
         let mut rapier_points = points.clone();
@@ -133,7 +133,7 @@ impl FluidImpl {
         fluid.create_times.resize(fluid.points.len());
         let ticks = Time::singleton().get_ticks_msec();
         for _i in old_times..fluid.points.len() {
-            fluid.create_times.push(ticks as f32);
+            fluid.create_times.push(ticks as f64);
         }
         let gl_transform = fluid.to_gd().get_global_transform();
         for i in 0..fluid.points.len() {
@@ -173,7 +173,7 @@ impl FluidImpl {
         if fluid.lifetime <= 0.0 {
             return;
         }
-        let ticks = Time::singleton().get_ticks_msec() as f32;
+        let ticks = Time::singleton().get_ticks_msec() as f64;
         let mut to_remove = PackedInt32Array::default();
         for i in 0..fluid.create_times.len() {
             if ticks - fluid.create_times[i] > fluid.lifetime * 1000.0 {

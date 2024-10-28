@@ -13,9 +13,9 @@ use crate::rapier_wrapper::prelude::*;
 use crate::servers::rapier_physics_singleton::RapierId;
 use crate::types::Vector;
 pub struct RapierRevoluteJoint {
-    angular_limit_lower: f32,
-    angular_limit_upper: f32,
-    motor_target_velocity: f32,
+    angular_limit_lower: f64,
+    angular_limit_upper: f64,
+    motor_target_velocity: f64,
     motor_enabled: bool,
     angular_limit_enabled: bool,
     base: RapierJointBase,
@@ -84,7 +84,7 @@ impl RapierRevoluteJoint {
     pub fn set_param(
         &mut self,
         p_param: physics_server_2d::PinJointParam,
-        p_value: f32,
+        p_value: f64,
         physics_engine: &mut PhysicsEngine,
     ) {
         match p_param {
@@ -117,7 +117,7 @@ impl RapierRevoluteJoint {
     pub fn set_param(
         &mut self,
         p_param: physics_server_3d::HingeJointParam,
-        p_value: f32,
+        p_value: f64,
         physics_engine: &mut PhysicsEngine,
     ) {
         match p_param {
@@ -147,7 +147,7 @@ impl RapierRevoluteJoint {
     }
 
     #[cfg(feature = "dim2")]
-    pub fn get_param(&self, p_param: physics_server_2d::PinJointParam) -> f32 {
+    pub fn get_param(&self, p_param: physics_server_2d::PinJointParam) -> f64 {
         match p_param {
             physics_server_2d::PinJointParam::LIMIT_UPPER => self.angular_limit_upper,
             physics_server_2d::PinJointParam::LIMIT_LOWER => self.angular_limit_lower,
@@ -157,7 +157,7 @@ impl RapierRevoluteJoint {
     }
 
     #[cfg(feature = "dim3")]
-    pub fn get_param(&self, p_param: physics_server_3d::HingeJointParam) -> f32 {
+    pub fn get_param(&self, p_param: physics_server_3d::HingeJointParam) -> f64 {
         match p_param {
             physics_server_3d::HingeJointParam::LIMIT_UPPER => self.angular_limit_upper,
             physics_server_3d::HingeJointParam::LIMIT_LOWER => self.angular_limit_lower,

@@ -51,7 +51,7 @@ impl RapierDirectBodyStateImpl {
         Vector::ZERO
     }
 
-    pub(super) fn get_total_linear_damp(&self) -> f32 {
+    pub(super) fn get_total_linear_damp(&self) -> f64 {
         let physics_data = physics_data();
         if let Some(body) = physics_data.collision_objects.get(&self.body) {
             if let Some(body) = body.get_body() {
@@ -61,7 +61,7 @@ impl RapierDirectBodyStateImpl {
         0.0
     }
 
-    pub(super) fn get_total_angular_damp(&self) -> f32 {
+    pub(super) fn get_total_angular_damp(&self) -> f64 {
         let physics_data = physics_data();
         if let Some(body) = physics_data.collision_objects.get(&self.body) {
             if let Some(body) = body.get_body() {
@@ -92,7 +92,7 @@ impl RapierDirectBodyStateImpl {
         Vector::ZERO
     }
 
-    pub(super) fn get_inverse_mass(&self) -> f32 {
+    pub(super) fn get_inverse_mass(&self) -> f64 {
         let physics_data = physics_data();
         if let Some(body) = physics_data.collision_objects.get(&self.body) {
             if let Some(body) = body.get_body() {

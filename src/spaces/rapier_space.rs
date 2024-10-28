@@ -278,7 +278,7 @@ impl RapierSpace {
             .get_setting_with_override("physics/common/physics_ticks_per_second".into());
         let mut last_step = 1e-3;
         if !physics_fps.is_nil() {
-            last_step = 1.0 / (physics_fps.to::<i32>() as f32);
+            last_step = 1.0 / (physics_fps.to::<i32>() as f64);
         }
         last_step
     }

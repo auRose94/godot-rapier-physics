@@ -74,7 +74,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.shape_set_data(shape, data)
     }
 
-    fn shape_set_custom_solver_bias(&mut self, _shape: Rid, _bias: f32) {}
+    fn shape_set_custom_solver_bias(&mut self, _shape: Rid, _bias: f64) {}
 
     fn shape_get_type(&self, shape: Rid) -> ShapeType {
         self.implementation.shape_get_type(shape)
@@ -84,7 +84,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.shape_get_data(shape)
     }
 
-    fn shape_get_custom_solver_bias(&self, shape: Rid) -> f32 {
+    fn shape_get_custom_solver_bias(&self, shape: Rid) -> f64 {
         self.implementation.shape_get_custom_solver_bias(shape)
     }
 
@@ -125,11 +125,11 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.space_is_active(space)
     }
 
-    fn space_set_param(&mut self, space: Rid, param: SpaceParameter, value: f32) {
+    fn space_set_param(&mut self, space: Rid, param: SpaceParameter, value: f64) {
         self.implementation.space_set_param(space, param, value)
     }
 
-    fn space_get_param(&self, space: Rid, param: SpaceParameter) -> f32 {
+    fn space_get_param(&self, space: Rid, param: SpaceParameter) -> f64 {
         self.implementation.space_get_param(space, param)
     }
 
@@ -328,7 +328,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         body: Rid,
         shape_idx: i32,
         enable: bool,
-        margin: f32,
+        margin: f64,
     ) {
         self.implementation
             .body_set_shape_as_one_way_collision(body, shape_idx, enable, margin);
@@ -384,12 +384,12 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.body_get_collision_mask(body)
     }
 
-    fn body_set_collision_priority(&mut self, body: Rid, priority: f32) {
+    fn body_set_collision_priority(&mut self, body: Rid, priority: f64) {
         self.implementation
             .body_set_collision_priority(body, priority);
     }
 
-    fn body_get_collision_priority(&self, body: Rid) -> f32 {
+    fn body_get_collision_priority(&self, body: Rid) -> f64 {
         self.implementation.body_get_collision_priority(body)
     }
 
@@ -418,7 +418,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
             .body_apply_central_impulse(body, impulse);
     }
 
-    fn body_apply_torque_impulse(&mut self, body: Rid, impulse: f32) {
+    fn body_apply_torque_impulse(&mut self, body: Rid, impulse: f64) {
         self.implementation.body_apply_torque_impulse(body, impulse);
     }
 
@@ -465,7 +465,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.body_set_constant_torque(body, torque);
     }
 
-    fn body_get_constant_torque(&self, body: Rid) -> f32 {
+    fn body_get_constant_torque(&self, body: Rid) -> f64 {
         self.implementation.body_get_constant_torque(body)
     }
 
@@ -497,12 +497,12 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.body_get_max_contacts_reported(body)
     }
 
-    fn body_set_contacts_reported_depth_threshold(&mut self, body: Rid, threshold: f32) {
+    fn body_set_contacts_reported_depth_threshold(&mut self, body: Rid, threshold: f64) {
         self.implementation
             .body_set_contacts_reported_depth_threshold(body, threshold);
     }
 
-    fn body_get_contacts_reported_depth_threshold(&self, body: Rid) -> f32 {
+    fn body_get_contacts_reported_depth_threshold(&self, body: Rid) -> f64 {
         self.implementation
             .body_get_contacts_reported_depth_threshold(body)
     }
@@ -567,7 +567,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         body: Rid,
         from: Transform,
         motion: Vector,
-        margin: f32,
+        margin: f64,
         collide_separation_ray: bool,
         recovery_as_collision: bool,
         result: *mut PhysicsServerExtensionMotionResult,
@@ -592,11 +592,11 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.joint_clear(rid);
     }
 
-    fn joint_set_param(&mut self, joint: Rid, param: JointParam, value: f32) {
+    fn joint_set_param(&mut self, joint: Rid, param: JointParam, value: f64) {
         self.implementation.joint_set_param(joint, param, value);
     }
 
-    fn joint_get_param(&self, joint: Rid, param: JointParam) -> f32 {
+    fn joint_get_param(&self, joint: Rid, param: JointParam) -> f64 {
         self.implementation.joint_get_param(joint, param)
     }
 
@@ -648,20 +648,20 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.pin_joint_get_flag(joint, flag)
     }
 
-    fn pin_joint_set_param(&mut self, joint: Rid, param: PinJointParam, value: f32) {
+    fn pin_joint_set_param(&mut self, joint: Rid, param: PinJointParam, value: f64) {
         self.implementation.pin_joint_set_param(joint, param, value);
     }
 
-    fn pin_joint_get_param(&self, joint: Rid, param: PinJointParam) -> f32 {
+    fn pin_joint_get_param(&self, joint: Rid, param: PinJointParam) -> f64 {
         self.implementation.pin_joint_get_param(joint, param)
     }
 
-    fn damped_spring_joint_set_param(&mut self, joint: Rid, param: DampedSpringParam, value: f32) {
+    fn damped_spring_joint_set_param(&mut self, joint: Rid, param: DampedSpringParam, value: f64) {
         self.implementation
             .damped_spring_joint_set_param(joint, param, value);
     }
 
-    fn damped_spring_joint_get_param(&self, joint: Rid, param: DampedSpringParam) -> f32 {
+    fn damped_spring_joint_get_param(&self, joint: Rid, param: DampedSpringParam) -> f64 {
         self.implementation
             .damped_spring_joint_get_param(joint, param)
     }
@@ -682,7 +682,7 @@ impl IPhysicsServer2DExtension for RapierPhysicsServer2D {
         self.implementation.init_ext();
     }
 
-    fn step(&mut self, step: f32) {
+    fn step(&mut self, step: f64) {
         self.implementation.step(step);
     }
 

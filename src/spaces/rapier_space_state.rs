@@ -56,7 +56,7 @@ pub struct RapierSpaceState {
     monitor_query_list: HashSet<RapierId>,
     area_update_list: HashSet<RapierId>,
     body_area_update_list: HashSet<RapierId>,
-    time_stepped: f32,
+    time_stepped: f64,
     active_objects: i32,
     id: WorldHandle,
 }
@@ -166,11 +166,11 @@ impl RapierSpaceState {
         self.active_objects = count;
     }
 
-    pub fn get_time_stepped(&self) -> f32 {
+    pub fn get_time_stepped(&self) -> f64 {
         self.time_stepped
     }
 
-    pub fn set_time_stepped(&mut self, time: f32) {
+    pub fn set_time_stepped(&mut self, time: f64) {
         self.time_stepped = time;
     }
 
